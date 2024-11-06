@@ -14,17 +14,22 @@ void creation_utilisateur(FILE* user);
 // MENU
 void menu_admin()
 {
-    char choix[15];
+    int choix;
     do
     {
-        scanf("%s", choix);
-        if(!strcmp(choix, "creation_pnj"))
+        scanf("%d", choix);
+        switch (choix)
         {
+        case 5:
             FILE* fic = fopen(FICHIER_PNJ, "a+");
             creation_pnj(fic);
             fclose(fic);
+            break;
+        
+        default:
+            break;
         }
-    } while (!strcmp(choix, "quitter") || !strcmp(choix, "q"));
+    } while (choix == 0);
 }
 
 
@@ -41,8 +46,8 @@ void creation_utilisateur(FILE* user) //utilisé par le menu principal & le mode
 
 void changer_permission(UTILISATEUR utilisateur)
 {
-    if(utilisateur.permissions==0) statut = 
-    printf("Statut actuel : %s. Changer statut ?", )
+    printf("Statut actuel : %d (0 = joueur, 1 = admin). Changer statut ? y/n", utilisateur.permissions);
+    scanf(%s);
 }
 
 // SAUVEGARDE
@@ -74,7 +79,15 @@ void modifier_pnj(FILE *fic)
         if(!strcmp(pnj.nom, pnj_recherche))
         {
             printf("PNJ trouvé : Voulez-vous le modifier ? ");
-            
+            printf("Entrez le nom du PNJ : ");
+        scanf("%s", pnj.nom);
+        printf("Entrez son rôle : ");
+        scanf("%s", pnj.role);
+        pnj.faim = 100;
+        pnj.soif = 100;
+        fseek(fic, -sizeof(PNJ), SEEK_CUR);
+        fwrite(&pnj, sizeof(PNJ), 1, fic);
+        printf("PNJ modifié\n");
         }
     }
 }
