@@ -5,5 +5,6 @@
 
 int main(int argc, char* argv)
 {
+    printf("MENU");
     return 0;
 }
