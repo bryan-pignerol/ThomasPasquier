@@ -3,6 +3,7 @@
 
 #define TAILLE_NOM 20
 #define TAILLE_ROLE 10
+#define TAILLE_CONTENU_ARTICLE 200
 
 
 typedef struct
@@ -31,3 +32,10 @@ typedef struct
     int faim;
     int soif;
 } PNJ;
+
+typedef struct
+{
+    char nom[TAILLE_NOM];
+    char contenu[TAILLE_CONTENU_ARTICLE];
+    int jour;
+} ARTICLE;
