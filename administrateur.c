@@ -10,10 +10,11 @@
 #define NON "0"
 
 void menu_admin();
-void creation_pnj(FILE* fic);
-void modifier_pnj(FILE* fic);
 void creation_utilisateur(FILE* user);
 void changer_permission(UTILISATEUR utilisateur);
+void creation_pnj(FILE* fic);
+void modifier_pnj(FILE* fic);
+void afficher_pnjs(FILE* fic);
 
 
 // MENU
@@ -22,32 +23,41 @@ void menu_admin()
     int choix;
     do
     {
-        printf("---UTILISATEUR---\n");
-        printf("MODIFIER PROFIL COURANT...........:\n");
-        printf("MODIFIER PROFIL D'UN UTILISATEUR..:\n\n");
-        printf("---BASE DE DONNEES---");
-        printf("AJOUTER PNJ.......................:");
-        printf("MODIFIER PNJ");
+        printf("-------------UTILISATEUR-------------\n");
+        printf("MODIFIER PROFIL COURANT...........: 1\n");
+        printf("MODIFIER PROFIL D'UN UTILISATEUR..: 2\n\n");
+        printf("-----------BASE DE DONNEES-----------\n");
+        printf("AJOUTER PNJ.......................: 3\n");
+        printf("MODIFIER PNJ......................: 4\n");
+        printf("AFFICHER PNJs.....................: 5\n\n");
+        printf("QUITTER...........................: 0\n\n");
+        printf("Entrez votre choix : ");
         scanf("%d", choix);
         switch (choix)
         {
-        case 5:
+        case 3:
             FILE* fic = fopen(FICHIER_PNJ, "a+");
             creation_pnj(fic);
             fclose(fic);
             break;
         
-        case 6:
+        case 4:
             FILE* fic = fopen(FICHIER_PNJ, "r+");
             fseek(fic, 0, SEEK_SET);
             modifier_pnj(fic);
             fclose(fic);
             break;
         
+        case 5:
+            FILE* fic = fopen(FICHIER_PNJ, "r");
+            fseek(fic, 0, SEEK_SET);
+            afficher_pnjs(fic);
+            fclose(fic);
+
         default:
             break;
         }
-    } while (choix == 0);
+    } while (choix != 0);
 }
 
 
@@ -63,7 +73,7 @@ void creation_utilisateur(FILE* user) //utilisé par le menu principal & le mode
     UTILISATEUR utilisateur;
     utilisateur.permissions = JOUEUR;
     renommer_utilisateur(utilisateur);
-    user = fopen("FICHIER_UTILISATEURS", "a+");
+    //user = fopen("FICHIER_UTILISATEURS", "a+");
     fwrite(&utilisateur, sizeof(utilisateur), 1, user);
 }
 
@@ -115,5 +125,22 @@ void modifier_pnj(FILE *fic)
         fwrite(&pnj, sizeof(PNJ), 1, fic);
         printf("PNJ modifié\n");
         }
+    }
+}
+
+void afficher_pnjs(FILE* fic)
+{
+    PNJ pnj;
+
+    if(fread(&pnj, sizeof(PNJ), 1, fic) == 0)
+    {
+        printf("Il n'y a aucun PNJ de créé\n");
+        return;
+    }
+
+    while(fread(&pnj, sizeof(PNJ), 1, fic) != 0)
+    {
+        prinft("Nom : %s\n", pnj.nom);
+        printf("Rôle : %s\n\n", pnj.role);
     }
 }

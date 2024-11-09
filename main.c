@@ -3,7 +3,7 @@
 #include "administrateur.c"
 #include "structures.c"
 
-#define FICHIER_SAUVEGARDE "save.dat"
+#define SUFFIXE_FICHIER_SAUVEGARDE "_save.dat"
 
 void initialiser();
 void menu(FILE* fic);
@@ -35,11 +35,12 @@ void menu(FILE* fic)
             printf("1. Nouvelle partie");
             printf("2. Charger");
             printf("3. Quitter");
+            printf("4. Mode admin");
             scanf("%d", &choix);
 
             switch (choix) {
             case 1:
-                FILE *fichier = fopen(FICHIER_SAUVEGARDE, "a+");
+                FILE *fichier = fopen(SUFFIXE_FICHIER_SAUVEGARDE, "a+");
                 //demande a l utilisateur d entrer un nom et cree un fichier de sauvegarde et un profil (+erreur deja pris)
                 break;
             case 2:
@@ -47,6 +48,9 @@ void menu(FILE* fic)
                 break;
             case 3:
                 //Termine le programme
+                break;
+            case 4:
+                menu_admin();
                 break;
 
             default:
