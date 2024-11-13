@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #define SUFFIXE_FICHIER_SAUVEGARDE "_save.dat"
 

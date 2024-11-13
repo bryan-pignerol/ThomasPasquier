@@ -2,7 +2,7 @@
 #include <string.h>
 
 #define TAILLE_NOM 20
-#define TAILLE_ROLE 10
+#define TAILLE_ROLE 30
 
 #define TAILLE_CONTENU_ARTICLE 500
 
@@ -15,7 +15,11 @@ typedef struct
 
 typedef struct
 {
-    int pomme;
+    int levure; // MAX = 50
+    int farine; // MAX = 500
+    int eau; // MAX : 10
+    int nourriture; // MAX : 10
+    int ingredient_special; // MAX 1
 } INVENTAIRE;
 
 typedef struct
@@ -28,6 +32,7 @@ typedef struct
 
 typedef struct
 {
+    char prenom[TAILLE_NOM];
     char nom[TAILLE_NOM];
     char role[TAILLE_ROLE];
     int faim;
