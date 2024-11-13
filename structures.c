@@ -11,6 +11,7 @@ typedef struct
 {
     char nom[TAILLE_NOM];
     int permissions; // 0 --> UTILISATEUR | 1 --> ADMIN
+    char sauvegarde[TAILLE_NOM+10];
 } UTILISATEUR;
 
 typedef struct

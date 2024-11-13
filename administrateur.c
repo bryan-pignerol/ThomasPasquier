@@ -8,13 +8,16 @@
 #define OUI 1
 #define NON 0
 
+//Vérifier la correspondance arguments prototype/fonction
 void menu_admin(UTILISATEUR profil);
 void menu_edition_utilisateur(UTILISATEUR profil);
+void menu_edition_sauvegarde();//A completer
 void creation_utilisateur(FILE* utilisateurs);
 void renommer_utilisateur(FILE* utilisateurs);
 void changer_permission(FILE* utilisateurs);
 void supprimer_utilisateur(UTILISATEUR profil, FILE* utilisateurs);
 void afficher_liste_utilisateurs(FILE* utilisateurs);
+void rechercher_utilisateur();//A completer
 void selection_utilisateur(FILE* utilisateurs);
 void creation_pnj(FILE* fic);
 void modifier_pnj(FILE* fic);
@@ -54,14 +57,14 @@ void menu_admin(UTILISATEUR profil)
 
             case 1:
                 fic = fopen(FICHIER_UTILISATEURS, "r+");
-                void menu_edition_utilisateur(UTILISATEUR profil);
+                menu_edition_utilisateur(nom); //char à rajouter
                 fclose(fic);
                 break;
                 
             case 2:
                 fic = fopen(FICHIER_UTILISATEURS, "r+");
                 //selection utilisateur
-                void menu_edition_utilisateur(UTILISATEUR profil);
+                menu_edition_utilisateur(nom);//char à rajouter
                 fclose(fic);
                 break;
                 
@@ -100,43 +103,53 @@ void menu_edition_utilisateur(UTILISATEUR profil)
     int choix;
     do
     {
-        FILE* fic;
-        printf("----------MODIFIER UTILISATEUR---------\n");
-        printf("RENOMMER............................: 0\n");
-        printf("CHANGER PERMISSIONS.................: 1\n");
-        printf("SUPPRIMER...........................: 2\n\n");
-        printf("EDITER FICHIER SAUVEGARDE...........: 3\n\n");
-        printf("QUITTER.............................: 4\n\n");
+        printf("---------MODIFIER UTILISATEUR--------\n");
+        printf("RENOMMER..........................: 0\n");
+        printf("CHANGER PERMISSIONS...............: 1\n");
+        printf("SUPPRIMER.........................: 2\n\n");
+        printf("EDITER FICHIER SAUVEGARDE.........: 3\n\n");
+        printf("QUITTER...........................: 4\n\n");
         printf("Entrez votre choix : ");
         scanf("%d", &choix);
         switch (choix)
         {
             case 0:
-                fic = fopen(FICHIER_UTILISATEURS, "a+");
                 renommer_utilisateur(fic);
-                fclose(fic);
                 break;
 
             case 1:
-                fic = fopen(FICHIER_UTILISATEURS, "r+");
                 changer_permission(fic);
-                fclose(fic);
                 break;
                 
-            case 2:
-                fic = fopen(FICHIER_UTILISATEURS, "r+");
-                //supprimer
-                fclose(fic);
+            case 2: //Bouger une partie dans la fonction supprimer + à corriger au propre
+                if strcp(fichier_courant, profil.nom) == 0
+                {
+                    int nb_admin = 0;
+                    while (fread(&profil, sizeof(profil), 1, utilisateurs) != 0 && nb_admin < 2)
+                    {
+                        if (profil.permissions == ADMIN)
+                        {
+                            nb_admin++;
+                        }
+                    }
+                    if (nb_admin < 2)
+                    {
+                        printf("Action interdite : vous êtes le dernier administrateur !\n")
+                    }
+                    else supprimer_utilisateur(profil);
+                }
+                else supprimer_utilisateur(profil);
                 break;
                 
             case 3:
-                fic = fopen(FICHIER_PNJ, "a+");
+                FILE* save;
+                save = fopen(nom_sauvegarde, "r+");//vient de profil.sauvegarde
                 //menu edition sauvegarde
-                fclose(fic);
+                fclose(save);
                 break;
             
             case 4:
-                printf("Retour au menu principal\n");
+                printf("Retour au menu admin\n");
                 break;
 
             default:
@@ -146,7 +159,7 @@ void menu_edition_utilisateur(UTILISATEUR profil)
     } while (choix != 4);
 }
 
-// UTILISATEURS (penser à rajouter les prototypes)
+// UTILISATEURS
 void renommer_utilisateur(FILE* utilisateurs)
 {
     UTILISATEUR profil;
@@ -154,9 +167,10 @@ void renommer_utilisateur(FILE* utilisateurs)
     printf("Veuillez entrer un nom d'utilisateur : ");
     scanf("%s", profil.nom);
     fwrite(&profil, sizeof(profil), 1, utilisateurs);
+    fseek(utilisateurs, -sizeof(profil), SEEK_CUR);
 }
 
-void creation_utilisateur(FILE* utilisateurs) //utilisé par le menu principal & le mode admin
+void creation_utilisateur(FILE* utilisateurs)
 {
     UTILISATEUR profil;
 
@@ -171,8 +185,10 @@ void creation_utilisateur(FILE* utilisateurs) //utilisé par le menu principal &
             printf("ERREUR : Permission non valide. Recommencez.");
         }
     } while(profil.permissions != JOUEUR && profil.permissions != ADMIN);
-
-    //Associer un fichier de sauvegarde
+    FILE* new_save
+    profil.sauvegarde = strct(profil.nom+SUFFIXE_FICHIER_SAUVEGARDE);
+    new_save = fopen(profil.nom, a+);
+    fclose(new_save);
     fwrite(&profil, sizeof(UTILISATEUR), 1, utilisateurs);
 }
 
@@ -189,15 +205,34 @@ void changer_permission(FILE* utilisateurs)
 
 void supprimer_utilisateur(UTILISATEUR profil, FILE* utilisateurs)
 {
-    fseek(utilisateurs, 0, SEEK_SET);
-
+    if()
+    {
+        int confirmation;
+        printf("Etes vous sur de vouloir supprimer votre profil ? Cela vous ramènera au menu principal\n");
+        scanf(%s, confirmation);
+        if (confirmation == 1)
+        {
+            //code pour supprimer
+        }
+    }
+    else
+    {
+        int confirmation;
+        printf("Etes vous sur de vouloir supprimer ce profil : %s ?\n", profil.nom); //probablement pas profil.nom
+        scanf(%s, confirmation);
+        if (confirmation == 1)
+        {
+            //code pour supprimer
+        }
+    }
+    //fseek(utilisateurs, -sizeof(profil), SEEK_CUR);
 }
 
 void afficher_liste_utilisateurs(FILE* utilisateurs)
 {
     UTILISATEUR profil;
     printf("Utilisateurs :\n");
-    fseek(utilisateurs,0,SEEK_SET);
+    fseek(utilisateurs, 0, SEEK_SET);
     while (fread(&profil, sizeof(profil), 1, utilisateurs) != 0)
 	{
 		printf("* %s (%d)\n",profil.nom, profil.permissions);
@@ -212,7 +247,7 @@ void selection_utilisateur(FILE* utilisateurs, char nom)
 	{
 		if (strcmp(nom, profil.nom) == 0)
         {
-            
+            fseek(utilisateurs, -sizeof(profil), SEEK_CUR);
         }
     }
 }
