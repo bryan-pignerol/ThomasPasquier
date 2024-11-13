@@ -3,7 +3,8 @@
 
 #define TAILLE_NOM 20
 #define TAILLE_ROLE 10
-#define TAILLE_CONTENU_ARTICLE 200
+
+#define TAILLE_CONTENU_ARTICLE 500
 
 
 typedef struct

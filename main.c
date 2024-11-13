@@ -1,17 +1,20 @@
 #include <stdio.h>
 #include <string.h>
-#include "administrateur.c"
 #include "structures.c"
-
-#define SUFFIXE_FICHIER_SAUVEGARDE "_save.dat"
+#include "save.c"
+#include "administrateur.c"
 
 void initialiser();
-void menu(FILE* fic);
+UTILISATEUR connexion();
+void menu();
 void nouvelle_partie(FILE* fic);
 
 int main(int argc, char* argv)
 {
+    UTILISATEUR utilisateur_courant;
+    utilisateur_courant = connexion();
     initialiser();
+    menu();
     return 0;
 }
 
@@ -27,15 +30,32 @@ void initialiser()
 }
 
 
-void menu(FILE* fic)
+UTILISATEUR connexion()
+{
+    UTILISATEUR utilisateur;
+    FILE* fic_utilisateur = fopen(FICHIER_UTILISATEURS, "r+");
+    char nom[TAILLE_NOM];
+    printf("Entrez votre nom d'utilisateur : ");
+    scanf("%s", utilisateur.nom);
+    while(fread(&utilisateur, sizeof(UTILISATEUR), 1, fic_utilisateur) != 0)
+    {
+        if(!strcmp(nom, utilisateur.nom))
+        {
+            fclose(fic_utilisateur);
+            return utilisateur;
+        }
+    }
+}
+
+
+void menu()
 {
         int choix;
-        while (choix != '3') {
-
-            printf("1. Nouvelle partie");
-            printf("2. Charger");
-            printf("3. Quitter");
-            printf("4. Mode admin");
+        do {
+            printf("1. Nouvelle partie\n");
+            printf("2. Charger sauvegarde\n");
+            printf("3. Menu admin\n");
+            printf("4. Quitter\n");
             scanf("%d", &choix);
 
             switch (choix) {
@@ -44,21 +64,23 @@ void menu(FILE* fic)
                 //demande a l utilisateur d entrer un nom et cree un fichier de sauvegarde et un profil (+erreur deja pris)
                 break;
             case 2:
-                //recupere le nom du fichier de sauvegarde dans le profil et le charge (+erreur si non trouve)
+                // charger_sauvegarde();//recupere le nom du fichier de sauvegarde dans le profil et le charge (+erreur si non trouve)
                 break;
             case 3:
-                //Termine le programme
-                break;
-            case 4:
                 menu_admin();
                 break;
 
             default:
                 printf("Erreur, commande non trouvee...");
             }
-        }
+        } while(choix != 4);
 
     // fclose(fichier);  // Fermer le fichier a la fin du programme
 
 }
 
+
+void nouvelle_partie(FILE* fic)
+{
+    return;
+}
