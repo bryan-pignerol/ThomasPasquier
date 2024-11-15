@@ -3,6 +3,7 @@
 
 #define TAILLE_NOM 20
 #define TAILLE_ROLE 30
+#define TAILLE_FICHIER_SAUVEGARDE 36
 
 #define TAILLE_CONTENU_ARTICLE 500
 
@@ -11,7 +12,7 @@ typedef struct
 {
     char nom[TAILLE_NOM];
     int permissions; // 0 --> UTILISATEUR | 1 --> ADMIN
-    char sauvegarde[TAILLE_NOM+10];
+    char sauvegarde[TAILLE_FICHIER_SAUVEGARDE]; //Faudrait faire un PREFIXE_FICHIER_SAUVEGARDE mais je trouve plus où est rangé le suffixe
 } UTILISATEUR;
 
 typedef struct

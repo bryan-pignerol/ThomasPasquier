@@ -3,11 +3,13 @@
 #include "structures.c"
 #include "save.c"
 #include "administrateur.c"
+#include "events.c"
 
 void initialiser();
 UTILISATEUR connexion();
 void menu(UTILISATEUR profil);
 void nouvelle_partie(FILE* fic);
+void menu_jeu(SAVE sauvegarde);
 
 int main(int argc, char* argv)
 {
@@ -111,4 +113,20 @@ void menu(UTILISATEUR profil)
 void nouvelle_partie(FILE* fic)
 {
     return;
+}
+
+
+// JEU
+void menu_jeu(SAVE sauvegarde)
+{
+    int en_jeu = 1;
+    while(en_jeu == 1)
+    {
+        int jour = sauvegarde.jour;
+        int actions = 3;
+        char input[30];
+        printf("Entrez votre commande : ");
+        scanf("%s", input);
+        
+    }
 }
