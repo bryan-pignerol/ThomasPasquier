@@ -7,6 +7,7 @@ typedef struct {
     JOUEUR joueur;
     PNJ *pnj;
     ARTICLE *article;
+    int jour;
 } SAVE;
 
 SAVE nouvelle_sauvegarde();

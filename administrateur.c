@@ -39,7 +39,7 @@ void menu_admin(UTILISATEUR profil)
         printf("-------------UTILISATEUR-------------\n");
         printf("CREER UTILISATEUR.................: 0\n");
         printf("MODIFIER PROFIL COURANT...........: 1\n");
-        printf("MODIFIER PROFIL D'UN UTILISATEUR..: 2\n\n");
+        printf("MODIFIER PROFIL D'UN UTILISATEUR..: 2\n\n");//Place le curseur au bon endroit dans le fichier
         printf("-----------BASE DE DONNEES-----------\n");
         printf("CREATION PNJ......................: 3\n");
         printf("MODIFIER PNJ......................: 4\n");
@@ -63,8 +63,10 @@ void menu_admin(UTILISATEUR profil)
                 
             case 2:
                 fic = fopen(FICHIER_UTILISATEURS, "r+");
-                //selection utilisateur
-                menu_edition_utilisateur(nom);//char à rajouter
+                printf("Selectionner le profil à modifier :\n");
+                scanf("%s", nom);//Rajouter variable nom
+                void selection_utilisateur(utilisateurs, nom);
+                void menu_edition_utilisateur(profil);//"profil" Superflu je crois
                 fclose(fic);
                 break;
                 
