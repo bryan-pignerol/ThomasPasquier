@@ -5,6 +5,7 @@
 void lire_actualites(SAVE sauvegarde); 
 void livre_miserables();
 void livre_cuisine();
+void jounral_intime();
 
 
 /*
@@ -51,8 +52,12 @@ void livre_miserables()
 
 void livre_cuisine()
 {
-    printf("SOMMAIRE");
-    printf("1. Recette loukoums de Narnia");
+    printf("Recette loukoums de Narnia");
     printf("Loukoums magiques :\nIngrédients\nFécule de maïs (maïzena) : 100 g\nEau : 350 ml\nJus de citron : 1 c. à soupe\nEau de rose (ou autre arôme comme fleur d’oranger, citron, ou vanille) : 1 c. à soupe\nColorant alimentaire (optionnel) : une goutte (rose ou rouge pour l'eau de rose)\nSucre glace : 50 g\nFécule de maïs supplémentaire : 50 g");
-    printf("ps : Vous pouvez ajouter de la levure chimique industrielle ou fabriquer la votre :\nRecette levure chimique (ajuster les quantités au besoin) :\n- farine 100g \n- eau tiede 100ml\n- laisser reposer 24h-48h à 25°C ");
+    printf("ps : Vous pouvez ajouter de la levure chimique industrielle ou fabriquer la votre :\nRecette levure chimique (ajuster les quantités au besoin) :\n- farine 100g \n- eau tiede 100ml\n- laisser reposer 24h-48h à 25°C\n\n");
+}
+
+void journal_intime()
+{
+    printf("20 novembre 2024\nCher journal,\nAujourd'hui, comme chaque matin, l'odeur du pain chaud s'est infiltrée dans ma chambre avant même que le soleil ne se lève. C’est Mamie qui fait son pain aux graines de tournesol, avec son ingrédient sucré. Rien de tel pour commencer la journée. Elle dit toujours que la boulangerie, c’est « l’art de nourrir le cœur et l’âme ». Si seulement je pouvais croire que j’ai ça en moi...\n");
 }

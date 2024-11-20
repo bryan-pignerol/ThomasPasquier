@@ -181,7 +181,7 @@ void renommer_utilisateur(FILE* utilisateurs) //Clean
 void creation_utilisateur(FILE* utilisateurs) //Clean, 1 FILE à bouger peut être
 {
     UTILISATEUR profil;
-    FILE* new_save; //Est-ce qu'on bouge la déclaration ailleurs ?
+    FILE* new_save;
     printf("Entrez le nom d'utilisateur : ");
     scanf("%s", profil.nom);
     do
@@ -211,16 +211,28 @@ void changer_permission(FILE* utilisateurs)
     fwrite(&profil, sizeof(profil), 1, utilisateurs);
 }
 
-void supprimer_utilisateur(UTILISATEUR profil, FILE* utilisateurs)
+void supprimer_utilisateur(UTILISATEUR profil, FILE* utilisateurs)//profil => char nom
 {
-    if(1)
+    if(1)//strcmp(profil_courant, nom)==0
     {
         int confirmation;
         printf("Etes vous sur de vouloir supprimer votre profil ? Cela vous ramènera au menu principal\n");
         scanf("%s", confirmation);
         if (confirmation == 1)
         {
-            //code pour supprimer
+            /*
+            *FILE tampon
+            UTILISATEUR profil;
+            tampon = fopen(tampon_suppression.dat, w);
+            while (fread(&profil, sizeof(profil), 1, utilisateurs) != 0)
+	        {
+                if (strcmp(nom, profil.nom) != 0)
+                {
+                    fwrite(&profil, sizeof(profil), 1, tampon);
+                }
+            }
+            fopen 
+            */
         }
     }
     else

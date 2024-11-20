@@ -8,7 +8,7 @@
 void initialiser();
 UTILISATEUR connexion();
 void menu(UTILISATEUR profil);
-void nouvelle_partie(FILE* fic);
+void nouvelle_partie(UTILISATEUR profil);
 void menu_jeu(SAVE sauvegarde);
 
 int main(int argc, char* argv)
@@ -19,9 +19,9 @@ int main(int argc, char* argv)
     printf("  | | | |_| | | | | |\\/| | / _ \\ \\___ \\  | |_) / _ \\ \\___ \\| | | | | | || ||  _| | |_) |\n");
     printf("  | | |  _  | |_| | |  | |/ ___ \\ ___) | |  __/ ___ \\ ___) | |_| | |_| || || |___|  _ < \n");
     printf("  |_| |_| |_|\\___/|_|  |_/_/   \\_\\____/  |_| /_/   \\_\\____/ \\__\\_ \\___/|___|_____|_| \\_\\\n");
-    printf("░█░░░█▀▀░░░█▀▀░█░█░█▀█░█▄█░█▀▀░█░█░█▀▄░░░█▀▄░█▀▀░░░█░░░▀░█▀▀░█▀▀░█▀█░█▀█░█▀▀░█▀▀\n");
-    printf("░█░░░█▀▀░░░█░░░█▀█░█░█░█░█░█▀▀░█░█░█▀▄░░░█░█░█▀▀░░░█░░░░░█▀▀░▀▀█░█▀▀░█▀█░█░░░█▀▀\n");
-    printf("░▀▀▀░▀▀▀░░░▀▀▀░▀░▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀░▀░░░▀▀░░▀▀▀░░░▀▀▀░░░▀▀▀░▀▀▀░▀░░░▀░▀░▀▀▀░▀▀▀\n\n");
+    printf("    ░█░░░█▀▀░░░█▀▀░█░█░█▀█░█▄█░█▀▀░█░█░█▀▄░░░█▀▄░█▀▀░░░█░░░▀░█▀▀░█▀▀░█▀█░█▀█░█▀▀░█▀▀\n");
+    printf("    ░█░░░█▀▀░░░█░░░█▀█░█░█░█░█░█▀▀░█░█░█▀▄░░░█░█░█▀▀░░░█░░░░░█▀▀░▀▀█░█▀▀░█▀█░█░░░█▀▀\n");
+    printf("    ░▀▀▀░▀▀▀░░░▀▀▀░▀░▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀░▀░░░▀▀░░▀▀▀░░░▀▀▀░░░▀▀▀░▀▀▀░▀░░░▀░▀░▀▀▀░▀▀▀\n\n");
     
     initialiser();
     printf("CONNEXION UTILISATEUR\n");
@@ -88,7 +88,7 @@ void menu(UTILISATEUR profil)
 
         switch (choix) {
         case 1:
-            FILE *fichier = fopen(SUFFIXE_FICHIER_SAUVEGARDE, "a+");
+            nouvelle_partie(profil);
             //demande a l utilisateur d entrer un nom et cree un fichier de sauvegarde et un profil (+erreur deja pris)
             break;
         case 2:
@@ -103,7 +103,7 @@ void menu(UTILISATEUR profil)
             break;
 
         default:
-            printf("Erreur, commande non trouvee...");
+            printf("Erreur, commande non trouvée...");
         }
     } while(choix != 4);
 
@@ -112,8 +112,9 @@ void menu(UTILISATEUR profil)
 }
 
 
-void nouvelle_partie(FILE* fic)
+void nouvelle_partie(UTILISATEUR profil)
 {
+    nouvelle_sauvegarde(profil);
     return;
 }
 
@@ -131,85 +132,113 @@ void menu_jeu(SAVE sauvegarde)
         {
             char input[30];
             printf("Quel action voulez-vous effectuer ? : ");
-            scanf("%s", input);
+            fgets(input, 100, stdin);
 
             // ORDINATEUR CENTRAL
-            if(!strcmp(input, "ordinateur_central"))
+            if(strstr(input, "ordinateur") != NULL)
             {
-                int a_l_ordinateur = 1;
+                int ordinateur = 1;
                 printf("LIEU : ORDINATEUR CENTRAL\n");
                 do
                 {
                     printf("Que faire ? : ");
-                    scanf("%s", input);
-                    if(!strcmp(input, "regarder"))
+                    fgets(input, 100, stdin);
+                    if(strstr(input, "regarder") != NULL)
                     {
                         printf("Un ordinateur à la pointe de la technologie. Profitez-en, un chômeur comme vous n'en verra pas souvent.\n");
                     }
-                    else if(!strcmp(input, "lire_actualites"))
+                    else if(strstr(input, "actualites") != NULL || strstr(input, "journal") != NULL|| strstr(input, "lire") != NULL)
                     {
                         lire_actualites(sauvegarde);
                     }
-                    else_if(!strcmp(input, "tinder_galaxy"))
+                    else if(strstr(input, "tinder") != NULL)
                     {
                         printf("Rencontre les aliens les plus proches de ta galaxie <3\n");
                     }
-                    else if(!strcmp(input, "regarder_livres"))
+                    else if(strstr(input, "partir") != NULL  || strstr(input, "sortir") != NULL)
                     {
-                        printf("Vous trouvez une version marseillaise des Misérables de Victor Hugo ainsi qu'un livre de cuisine.\n");
-                        printf("Quel livre lire ? : ");
-                        scanf("%s", input);
-                        if(!strcmp(input, "miserables"))
-                        {
-                            livre_miserables();
-                        } else
-                        {
-                            printf("");
-                        }
+                        ordinateur = 0;
                     }
-                    else if(!strcmp(input, "partir"))
-                    {
-                        au_placard = 0;
-                    }
-                } while (au_placard == 1);
+                } while(ordinateur == 1);
             }
 
+            
             // PLACARD
-            if(!strcmp(input, "placard_etrange"))
+            if(strstr(input, "placard") != NULL)
             {
-                int au_placard = 1;
+                int placard = 1;
                 printf("LIEU : PLACARD ETRANGE\n");
                 do
                 {
                     printf("Que faire ? : ");
-                    scanf("%s", input);
-                    if(!strcmp(input, "regarder"))
+                    fgets(input, 100, stdin);
+                    if(strstr(input, "regarder") != NULL)
                     {
                         printf("Ce placard est loin d'être commode et n'est pas cohérent avec l'environnement spatial... Il y a un sac et des livres.\n");
                     }
-                    else if(!strcmp(input, "ouvrir_sac"))
+                    else if(strstr(input, "ouvrir_sac") != NULL)
                     {
 
                     }
-                    else if(!strcmp(input, "regarder_livres"))
+                    else if(strstr(input, "livre") != NULL)
                     {
-                        printf("Vous trouvez une version marseillaise des Misérables de Victor Hugo ainsi qu'un livre de cuisine.\n");
+                        printf("Vous trouvez une version marseillaise des Misérables de Victor Hugo ainsi qu'un livre de patisserie.\n");
                         printf("Quel livre lire ? : ");
-                        scanf("%s", input);
-                        if(!strcmp(input, "miserables"))
+                        fgets(input, 100, stdin);
+                        if(strstr(input, "miserable"))
                         {
                             livre_miserables();
-                        } else
+                        } 
+                        else if (strstr(input, "patisserie"))
+                        {
+                            livre_cuisine();
+                        }
+                        else 
                         {
                             printf("");
                         }
                     }
-                    else if(!strcmp(input, "partir"))
+                    else if(strstr(input, "partir") != NULL || strstr(input, "sortir") != NULL)
                     {
-                        au_placard = 0;
+                        placard = 0;
                     }
-                } while (au_placard == 1);
+                } while (placard == 1);
             }
+
+
+            // COUCHETTE
+            if(strstr(input, "couchette") != NULL || strstr(input, "dormir") != NULL)
+            {
+                int couchette = 1;
+                printf("LIEU : COUCHETTE\n");
+                do
+                {
+                    printf("Que faire ? : ");
+                    fgets(input, 100, stdin);
+                    if(strstr(input, "regarder") != NULL)
+                    {
+                        printf("C'est ici que tout le monde se repose. Vous avez aussi une baie vitrée avec vue sur la Voie Lactée et le centre Mayol. Attendez, c'est pas ma mère là-bas ?  Quand il n'y a plus de place, vous pouvez allez dormir dehors.");
+                    }
+                    else if (strstr(input, "journal") != NULL)
+                    {
+                        journal_intime();
+                    }
+                    else if(strstr(input, "partir") != NULL || strstr(input, "sortir") != NULL)
+                    {
+                        couchette = 0;
+                    }
+
+                } while (couchette == 1);
+                
+            }
+
+
+            // SYSTEME
+            if(strstr(input, "sauvegarder") != NULL)
+            {}
+
+            if(strstr(input, "quitter") != NULL)
+            {}
         } while(actions != 3);
         
     } while(en_jeu == 1);
