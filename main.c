@@ -2,8 +2,8 @@
 #include <string.h>
 #include "structures.c"
 #include "save.c"
-#include "administrateur.c"
 #include "events.c"
+#include "administrateur.c"
 
 void initialiser();
 UTILISATEUR connexion();
@@ -76,6 +76,7 @@ UTILISATEUR connexion()
 
 void menu(UTILISATEUR profil)
 {
+    SAVE sauvegarde;
     int choix;
     do {
         printf("1. Nouvelle partie\n");
@@ -92,6 +93,7 @@ void menu(UTILISATEUR profil)
             break;
         case 2:
             // charger_sauvegarde();//recupere le nom du fichier de sauvegarde dans le profil et le charge (+erreur si non trouve)
+            menu_jeu(sauvegarde);
             break;
         case 3:
             menu_admin(profil);
@@ -120,13 +122,95 @@ void nouvelle_partie(FILE* fic)
 void menu_jeu(SAVE sauvegarde)
 {
     int en_jeu = 1;
-    while(en_jeu == 1)
+    do
     {
         int jour = sauvegarde.jour;
         int actions = 3;
-        char input[30];
-        printf("Entrez votre commande : ");
-        scanf("%s", input);
+        printf("LIEU : CENTRE DE L'ISS\n");
+        do
+        {
+            char input[30];
+            printf("Quel action voulez-vous effectuer ? : ");
+            scanf("%s", input);
+
+            // ORDINATEUR CENTRAL
+            if(!strcmp(input, "ordinateur_central"))
+            {
+                int a_l_ordinateur = 1;
+                printf("LIEU : ORDINATEUR CENTRAL\n");
+                do
+                {
+                    printf("Que faire ? : ");
+                    scanf("%s", input);
+                    if(!strcmp(input, "regarder"))
+                    {
+                        printf("Un ordinateur à la pointe de la technologie. Profitez-en, un chômeur comme vous n'en verra pas souvent.\n");
+                    }
+                    else if(!strcmp(input, "lire_actualites"))
+                    {
+                        lire_actualites(sauvegarde);
+                    }
+                    else_if(!strcmp(input, "tinder_galaxy"))
+                    {
+                        printf("Rencontre les aliens les plus proches de ta galaxie <3\n");
+                    }
+                    else if(!strcmp(input, "regarder_livres"))
+                    {
+                        printf("Vous trouvez une version marseillaise des Misérables de Victor Hugo ainsi qu'un livre de cuisine.\n");
+                        printf("Quel livre lire ? : ");
+                        scanf("%s", input);
+                        if(!strcmp(input, "miserables"))
+                        {
+                            livre_miserables();
+                        } else
+                        {
+                            printf("");
+                        }
+                    }
+                    else if(!strcmp(input, "partir"))
+                    {
+                        au_placard = 0;
+                    }
+                } while (au_placard == 1);
+            }
+
+            // PLACARD
+            if(!strcmp(input, "placard_etrange"))
+            {
+                int au_placard = 1;
+                printf("LIEU : PLACARD ETRANGE\n");
+                do
+                {
+                    printf("Que faire ? : ");
+                    scanf("%s", input);
+                    if(!strcmp(input, "regarder"))
+                    {
+                        printf("Ce placard est loin d'être commode et n'est pas cohérent avec l'environnement spatial... Il y a un sac et des livres.\n");
+                    }
+                    else if(!strcmp(input, "ouvrir_sac"))
+                    {
+
+                    }
+                    else if(!strcmp(input, "regarder_livres"))
+                    {
+                        printf("Vous trouvez une version marseillaise des Misérables de Victor Hugo ainsi qu'un livre de cuisine.\n");
+                        printf("Quel livre lire ? : ");
+                        scanf("%s", input);
+                        if(!strcmp(input, "miserables"))
+                        {
+                            livre_miserables();
+                        } else
+                        {
+                            printf("");
+                        }
+                    }
+                    else if(!strcmp(input, "partir"))
+                    {
+                        au_placard = 0;
+                    }
+                } while (au_placard == 1);
+            }
+        } while(actions != 3);
         
-    }
+    } while(en_jeu == 1);
 }

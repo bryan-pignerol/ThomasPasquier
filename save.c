@@ -6,7 +6,7 @@
 typedef struct {
     JOUEUR joueur;
     PNJ *pnj;
-    ARTICLE *article;
+    ARTICLE article[5];
     int jour;
 } SAVE;
 

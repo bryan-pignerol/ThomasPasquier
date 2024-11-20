@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-
 #define FICHIER_UTILISATEURS "bdd/utilisateurs.dat"
 #define FICHIER_PNJ "bdd/pnj.dat"
 #define FICHIER_ARTICLES "bdd/articles.dat"
@@ -10,9 +9,9 @@
 #define NON 0
 
 //Vérifier la correspondance arguments prototype/fonction
-void menu_admin(UTILISATEUR profil);
-void menu_edition_utilisateur(UTILISATEUR profil);
-void menu_edition_sauvegarde();//A completer
+void menu_admin(UTILISATEUR profil);//A terme, mettre autre chose que le struct en argument
+void menu_edition_utilisateur(UTILISATEUR profil); //Idem
+void menu_edition_sauvegarde(UTILISATEUR profil);//A completer
 void creation_utilisateur(FILE* utilisateurs);
 void renommer_utilisateur(FILE* utilisateurs);
 void changer_permission(FILE* utilisateurs);
@@ -29,8 +28,9 @@ void afficher_article(FILE* fic);
 
 
 // MENU
-void menu_admin(UTILISATEUR profil)
+void menu_admin(UTILISATEUR profil)//A terme, mettre autre chose que le struct en argument
 {
+    //char nom_profil[TAILLE_NOM] = profil_courant //Profil courant à rajouter
     int choix;
     /* if(profil.permissions != ADMIN)
     {
@@ -43,7 +43,7 @@ void menu_admin(UTILISATEUR profil)
         printf("-------------UTILISATEUR-------------\n");
         printf("CREER UTILISATEUR.................: 0\n");
         printf("MODIFIER PROFIL COURANT...........: 1\n");
-        printf("MODIFIER PROFIL D'UN UTILISATEUR..: 2\n\n");//Place le curseur au bon endroit dans le fichier
+        printf("MODIFIER PROFIL D'UN UTILISATEUR..: 2\n\n");//Place le curseur au bon endroit dans le fichier utilisateurs
         printf("-----------BASE DE DONNEES-----------\n");
         printf("CREATION PNJ......................: 3\n");
         printf("MODIFIER PNJ......................: 4\n");
@@ -64,7 +64,7 @@ void menu_admin(UTILISATEUR profil)
 
             case 1: //Modifier profil courant
                 fic = fopen(FICHIER_UTILISATEURS, "r+");
-                // menu_edition_utilisateur(nom); //char à rajouter
+                // menu_edition_utilisateur(nom);
                 fclose(fic);
                 break;
                 
@@ -97,7 +97,7 @@ void menu_admin(UTILISATEUR profil)
                 break;
 
             case 6: //Quitter
-                printf("Retour au menu principal\n");
+                printf("Retour au menu principal\n");//Penser à modifier si on refait la partie menu & auth
                 break;
 
             default:
@@ -107,7 +107,7 @@ void menu_admin(UTILISATEUR profil)
     } while (choix != 6);
 }
 
-void menu_edition_utilisateur(UTILISATEUR profil)
+void menu_edition_utilisateur(UTILISATEUR profil)//Mettre autre chose que le struct en argument
 {
     int choix;
     do
@@ -130,8 +130,8 @@ void menu_edition_utilisateur(UTILISATEUR profil)
                 // changer_permission(fic);
                 break;
                 
-            case 2: //Bouger une partie dans la fonction supprimer + à corriger au propre
-                /* if strcp(fichier_courant, profil.nom) == 0
+            case 2: //Supprimer
+                /* if (strcmp(fichier_courant, profil.nom) == 0)
                 {
                     int nb_admin = 0;
                     while (fread(&profil, sizeof(profil), 1, utilisateurs) != 0 && nb_admin < 2)
@@ -153,7 +153,7 @@ void menu_edition_utilisateur(UTILISATEUR profil)
             case 3: //Editer fichier sauvegarde
                 FILE* save;
                 // save = fopen(nom_sauvegarde, "r+");//vient de profil.sauvegarde
-                //menu edition sauvegarde
+                //menu_edition_sauvegarde(); //A faire
                 fclose(save);
                 break;
             
