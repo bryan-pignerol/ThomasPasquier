@@ -1,6 +1,58 @@
 #include <stdio.h>
 #include <string.h>
 
+void minuscules(char *str) {
+    for (int i = 0; str[i]; i++) {
+        str[i] = tolower(str[i]);
+    }
+}
+
+// Avant la comparaison :
+int main() {
+    char input[50];    // Stocke la saisie utilisateur
+    char saisie[50];     // Stocke chaque mot lu du fichier
+    int trouve = 0;     // Indique si le mot est trouvé
+
+    minuscules(input);
+    minuscules(saisie);
+
+    // Ouvrir le fichier
+    FILE *file = fopen("../bdd/dictionnaire.dat", "r");
+    if (file == NULL) {
+        perror("Erreur lors de l'ouverture du fichier");
+        return 1;
+    }
+
+    // Demander à l'utilisateur de saisir un mot
+    printf("Bienvenue Monsieur Pasquier, que puis-je faire pour vous ?\n");
+    scanf("%49s", input);
+    fseek(file, 0, SEEK_SET);
+
+    // Lire le fichier mot par mot
+    while (fread(saisie, 20, 1, file) != 0) {
+        // Comparer le mot lu avec l'entrée utilisateur
+        if (strcmp(saisie, input) == 0) {
+            trouve = 1; // Le mot est trouvé
+            break;
+        }
+    }
+
+    // Vérifier si le mot a été trouvé
+    if (trouve) {
+        printf("Le mot '%s' est connu dans mon cerveau\n", input);
+    } else {
+        printf("Comment ça, '%s' ?\n", input);
+    }
+
+    // Fermer le fichier
+    fclose(file);
+    return 0;
+
+}
+
+/*#include <stdio.h>
+#include <string.h>
+
 #define VRAI 1
 #define FAUX 0
 
@@ -51,4 +103,4 @@ int main()
         reponse(choix);
     }
     return 0;
-}
+}*/

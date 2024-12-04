@@ -1,0 +1,65 @@
+[SYSTEME] : LIEU : CENTRE DE L'ISS
+[�] : 
+[SYSTEME] : LIEU : CENTRE DE L'ISS
+[�] : aller aux couchettes
+[SYSTEME] : LIEU : COUCHETTE
+
+[VOUS] : 20 novembre 2024
+Cher journal,
+Aujourd'hui, comme chaque matin, l'odeur du pain chaud s'est infiltrée dans ma chambre avant même que le soleil ne se lève. C’est Mamie qui fait son pain aux graines de tournesol, avec son ingrédient sucré. Rien de tel pour commencer la journée. Elle dit toujours que la boulangerie, c’est « l’art de nourrir le cœur et l’âme ». Si seulement je pouvais croire que j’ai ça en moi...
+
+[SYSTEME] : C'est ici que tout le monde se repose. Vous avez aussi une baie vitrée avec vue sur la Voie Lactée et le centre Mayol. Attendez, c'est pas ma mère là-bas ?  Quand il n'y a plus de place, vous pouvez allez dormir dehors.
+[SYSTEME] : LIEU : CENTRE DE L'ISS
+[SYSTEME] : LIEU : CENTRE DE L'ISS
+[] : 
+[SYSTEME] : LIEU : CENTRE DE L'ISS
+[] : Bonjour, je voudrais aller a l'o�g�[] : ordinateur
+[SYSTEME] : LIEU : ORDINATEUR CENTRAL
+[SYSTEME] : Rencontre les aliens les plus proches de ta galaxie <3
+[] : aller au couchette
+[SYSTEME] : LIEU : COUCHETTE
+
+[SYSTEME] : C'est ici que tout le monde se repose. Vous avez aussi une baie vitrée avec vue sur la Voie Lactée et le centre Mayol. Attendez, c'est pas ma mère là-bas ?  Quand il n'y a plus de place, vous pouvez allez dormir dehors.
+[] : placard
+[SYSTEME] : LIEU : PLACARD ETRANGE
+[SYSTEME] : Vous trouvez une version marseillaise des Misérables de Victor Hugo ainsi qu'un livre de patisserie.
+
+[VICTOR HUGO DE LA HESS] : CHAPITRE 1
+
+[VICTOR HUGO DE LA HESS] : Jean Valjean, enfin libre, sent le soleil de Marseille chauffer ses joues pour la première fois en dix-neuf ans. Dix-neuf ans ! Tout ça pour avoir piqué un bout de pain. Le type, il a des épaules larges comme la Méditerranée, mais y a une amertume dans ses yeux, comme quelqu'un qui a trop vu la noirceur du monde.
+
+[VICTOR HUGO DE LA HESS] : Quand il sort, il cligne des yeux comme un hibou. Les pierres du Vieux-Port l’aveuglent presque, ça fait des années qu’il a pas vu la mer.
+[VICTOR HUGO DE LA HESS] : « Alors c’est ça, la liberté, hein ? », qu’il se murmure.
+[VICTOR HUGO DE LA HESS] : Il a un vieux baluchon sous le bras, avec deux trois babioles ramassées au fil des années au bagne. Le long de la Canebière, il passe comme un fantôme, regardé de travers par les commerçants. Dans son regard, y a la fatigue et la colère.
+[VICTOR HUGO DE LA HESS] : Il cherche un endroit où passer la nuit, mais chaque porte qu’il toque se referme aussitôt. Des gens lui lancent des regards pleins de jugement.
+[VICTOR HUGO DE LA HESS] : « T’as vu celui-là ? Avec sa tronche de taulard, on dirait qu’il sort direct des Baumettes ! » qu’il entend chuchoter.
+[VICTOR HUGO DE LA HESS] : Les mots lui piquent la peau comme des épines. Finalement, épuisé et affamé, il erre jusqu’au quartier du Panier. Et là, il tombe sur une église, où un vieux prêtre au sourire large comme le Vieux-Port, Monseigneur Myriel, le remarque.
+[VICTOR HUGO DE LA HESS] : « Oh, toi là ! Viens, viens pas rester dehors comme un chien. Ce soir, c’est toi mon invité », dit l’abbé en lui tapant sur l’épaule.
+[VICTOR HUGO DE LA HESS] : Jean, il sait pas s’il doit se méfier ou pas, mais il a tellement faim qu’il suit le vieux sans broncher. À table, l’abbé sort le pastis et du pain frais. Les mains de Jean tremblent en coupant son morceau. Il avait presque oublié le goût du bon pain.
+
+[SYSTEME] : LIEU : CENTRE DE L'ISS
+[] : 
+[SYSTEME] : LIEU : CENTRE DE L'ISS
+[] : test
+[SYSTEME] : LIEU : CENTRE DE L'ISS
+[] : �
+[SYSTEME] : LIEU : CENTRE DE L'ISS
+[] : placard
+[SYSTEME] : LIEU : PLACARD ETRANGE
+[SYSTEME] : Vous trouvez une version marseillaise des Misérables de Victor Hugo ainsi qu'un livre de patisserie.
+
+[SYSTEME] : Vous trouvez une version marseillaise des Misérables de Victor Hugo ainsi qu'un livre de patisserie.
+
+[VICTOR HUGO DE LA HESS] : CHAPITRE 1
+
+[VICTOR HUGO DE LA HESS] : Jean Valjean, enfin libre, sent le soleil de Marseille chauffer ses joues pour la première fois en dix-neuf ans. Dix-neuf ans ! Tout ça pour avoir piqué un bout de pain. Le type, il a des épaules larges comme la Méditerranée, mais y a une amertume dans ses yeux, comme quelqu'un qui a trop vu la noirceur du monde.
+
+[VICTOR HUGO DE LA HESS] : Quand il sort, il cligne des yeux comme un hibou. Les pierres du Vieux-Port l’aveuglent presque, ça fait des années qu’il a pas vu la mer.
+[VICTOR HUGO DE LA HESS] : « Alors c’est ça, la liberté, hein ? », qu’il se murmure.
+[VICTOR HUGO DE LA HESS] : Il a un vieux baluchon sous le bras, avec deux trois babioles ramassées au fil des années au bagne. Le long de la Canebière, il passe comme un fantôme, regardé de travers par les commerçants. Dans son regard, y a la fatigue et la colère.
+[VICTOR HUGO DE LA HESS] : Il cherche un endroit où passer la nuit, mais chaque porte qu’il toque se referme aussitôt. Des gens lui lancent des regards pleins de jugement.
+[VICTOR HUGO DE LA HESS] : « T’as vu celui-là ? Avec sa tronche de taulard, on dirait qu’il sort direct des Baumettes ! » qu’il entend chuchoter.
+[VICTOR HUGO DE LA HESS] : Les mots lui piquent la peau comme des épines. Finalement, épuisé et affamé, il erre jusqu’au quartier du Panier. Et là, il tombe sur une église, où un vieux prêtre au sourire large comme le Vieux-Port, Monseigneur Myriel, le remarque.
+[VICTOR HUGO DE LA HESS] : « Oh, toi là ! Viens, viens pas rester dehors comme un chien. Ce soir, c’est toi mon invité », dit l’abbé en lui tapant sur l’épaule.
+[VICTOR HUGO DE LA HESS] : Jean, il sait pas s’il doit se méfier ou pas, mais il a tellement faim qu’il suit le vieux sans broncher. À table, l’abbé sort le pastis et du pain frais. Les mains de Jean tremblent en coupant son morceau. Il avait presque oublié le goût du bon pain.
+

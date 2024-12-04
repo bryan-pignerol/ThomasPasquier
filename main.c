@@ -9,7 +9,8 @@ void initialiser();
 UTILISATEUR connexion();
 void menu(UTILISATEUR profil);
 void nouvelle_partie(UTILISATEUR profil);
-void menu_jeu(SAVE sauvegarde);
+void chprintf(char* text, char* identifiant); // c --> chatbot
+void chatbot(SAVE sauvegarde);
 
 int main(int argc, char* argv)
 {
@@ -39,6 +40,10 @@ void initialiser()
     fclose(fic);
     fic = fopen(FICHIER_PNJ, "a+");
     fclose(fic);
+    fic = fopen(FICHIER_ARTICLES, "a+");
+    fclose(fic);
+    fic = fopen(FICHIER_DICTIONNAIRE, "a+");
+    fclose(fic);
 }
 
 
@@ -47,20 +52,20 @@ UTILISATEUR connexion()
     UTILISATEUR utilisateur;
     int sortie = 0;
     FILE* fic_utilisateur = fopen(FICHIER_UTILISATEURS, "r+");
-    char nom[TAILLE_NOM];
+    char identifiant[TAILLE_NOM];
     while(sortie == 0)
     {
         printf("Entrez votre nom d'utilisateur : ");
-        scanf("%s", nom);
-        printf("%s\n", nom);
+        scanf("%s", identifiant);
+        printf("%s\n", identifiant);
         while(fread(&utilisateur, sizeof(UTILISATEUR), 1, fic_utilisateur) != 0)
         {
-            if(!strcmp(nom, utilisateur.nom))
+            if(!strcmp(identifiant, utilisateur.nom))
             {
                 fclose(fic_utilisateur);
             }
         }
-        if(strcmp(nom, utilisateur.nom))
+        if(strcmp(identifiant, utilisateur.nom))
         {
             printf("ERREUR : Utilisateur non trouvé. Recommencez.\n");
             fseek(fic_utilisateur, 0, SEEK_SET);
@@ -93,7 +98,7 @@ void menu(UTILISATEUR profil)
             break;
         case 2:
             // charger_sauvegarde();//recupere le nom du fichier de sauvegarde dans le profil et le charge (+erreur si non trouve)
-            menu_jeu(sauvegarde);
+            chatbot(sauvegarde);
             break;
         case 3:
             menu_admin(profil);
@@ -118,34 +123,45 @@ void nouvelle_partie(UTILISATEUR profil)
     return;
 }
 
+void chprintf(char* text, char* nom)
+{
+    FILE* fic = fopen(FICHIER_HISTORIQUE, "a+");
+    printf("[%s] : %s\n", nom, text);
+    fprintf(fic, "[%s] : %s\n", nom, text);
+    fclose(fic);
+}
 
 // JEU
-void menu_jeu(SAVE sauvegarde)
+void chatbot(SAVE sauvegarde)
 {
+    FILE* historique;
     int en_jeu = 1;
     do
     {
         int jour = sauvegarde.jour;
         int actions = 3;
-        printf("LIEU : CENTRE DE L'ISS\n");
+        chprintf("LIEU : CENTRE DE L'ISS", "SYSTEME");
         do
         {
             char input[30];
             printf("Quel action voulez-vous effectuer ? : ");
             fgets(input, 100, stdin);
+            historique = fopen(FICHIER_HISTORIQUE, "a+");
+            fprintf(historique, "[%s] : %s", sauvegarde.joueur.nom, input);
+            fclose(historique);
 
             // ORDINATEUR CENTRAL
             if(strstr(input, "ordinateur") != NULL)
             {
                 int ordinateur = 1;
-                printf("LIEU : ORDINATEUR CENTRAL\n");
+                chprintf("LIEU : ORDINATEUR CENTRAL", "SYSTEME");
                 do
                 {
                     printf("Que faire ? : ");
                     fgets(input, 100, stdin);
                     if(strstr(input, "regarder") != NULL)
                     {
-                        printf("Un ordinateur à la pointe de la technologie. Profitez-en, un chômeur comme vous n'en verra pas souvent.\n");
+                        chprintf("Un ordinateur à la pointe de la technologie. Profitez-en, un chômeur comme vous n'en verra pas souvent.", "SYSTEME");
                     }
                     else if(strstr(input, "actualites") != NULL || strstr(input, "journal") != NULL|| strstr(input, "lire") != NULL)
                     {
@@ -153,7 +169,7 @@ void menu_jeu(SAVE sauvegarde)
                     }
                     else if(strstr(input, "tinder") != NULL)
                     {
-                        printf("Rencontre les aliens les plus proches de ta galaxie <3\n");
+                        chprintf("Rencontre les aliens les plus proches de ta galaxie <3", "SYSTEME");
                     }
                     else if(strstr(input, "partir") != NULL  || strstr(input, "sortir") != NULL)
                     {
@@ -167,22 +183,22 @@ void menu_jeu(SAVE sauvegarde)
             if(strstr(input, "placard") != NULL)
             {
                 int placard = 1;
-                printf("LIEU : PLACARD ETRANGE\n");
+                chprintf("LIEU : PLACARD ETRANGE", "SYSTEME");
                 do
                 {
                     printf("Que faire ? : ");
                     fgets(input, 100, stdin);
                     if(strstr(input, "regarder") != NULL)
                     {
-                        printf("Ce placard est loin d'être commode et n'est pas cohérent avec l'environnement spatial... Il y a un sac et des livres.\n");
+                        chprintf("Ce placard est loin d'être commode et n'est pas cohérent avec l'environnement spatial... Il y a un sac et des livres.", "SYSTEME");
                     }
-                    else if(strstr(input, "ouvrir_sac") != NULL)
+                    else if(strstr(input, "sac") != NULL)
                     {
 
                     }
                     else if(strstr(input, "livre") != NULL)
                     {
-                        printf("Vous trouvez une version marseillaise des Misérables de Victor Hugo ainsi qu'un livre de patisserie.\n");
+                        chprintf("Vous trouvez une version marseillaise des Misérables de Victor Hugo ainsi qu'un livre de patisserie.\n", "SYSTEME");
                         printf("Quel livre lire ? : ");
                         fgets(input, 100, stdin);
                         if(strstr(input, "miserable"))
@@ -210,14 +226,14 @@ void menu_jeu(SAVE sauvegarde)
             if(strstr(input, "couchette") != NULL || strstr(input, "dormir") != NULL)
             {
                 int couchette = 1;
-                printf("LIEU : COUCHETTE\n");
+                chprintf("LIEU : COUCHETTE\n", "SYSTEME");
                 do
                 {
                     printf("Que faire ? : ");
                     fgets(input, 100, stdin);
                     if(strstr(input, "regarder") != NULL)
                     {
-                        printf("C'est ici que tout le monde se repose. Vous avez aussi une baie vitrée avec vue sur la Voie Lactée et le centre Mayol. Attendez, c'est pas ma mère là-bas ?  Quand il n'y a plus de place, vous pouvez allez dormir dehors.");
+                        chprintf("C'est ici que tout le monde se repose. Vous avez aussi une baie vitrée avec vue sur la Voie Lactée et le centre Mayol. Attendez, c'est pas ma mère là-bas ?  Quand il n'y a plus de place, vous pouvez allez dormir dehors.", "SYSTEME");
                     }
                     else if (strstr(input, "journal") != NULL)
                     {

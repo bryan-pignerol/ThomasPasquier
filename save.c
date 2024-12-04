@@ -25,7 +25,7 @@ SAVE nouvelle_sauvegarde(UTILISATEUR profil) //profil = utilisateur_courant
     FILE* new_save;
     SAVE fichier_sauvegarde;
     printf("Entrez un nom pour le personnage (défaut : Thomas Pasquier)");
-    scanf(%s, fichier_sauvegarde.joueur);
+    scanf("%s", fichier_sauvegarde.joueur);
     // profil.nom
     for(int i = 0; i < TAILLE_FICHIER_SAUVEGARDE; i++)
     {
